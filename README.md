@@ -1,9 +1,9 @@
-# hub.docker.com/r/tiredofit/nginx
+# hub.docker.com/r/rusxakep/nginx
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/nginx.svg)](https://microbadger.com/images/tiredofit/nginx)
+[![Build Status](https://img.shields.io/docker/cloud/build/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Stars](https://img.shields.io/docker/stars/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Layers](https://images.microbadger.com/badges/image/rusxakep/nginx.svg)](https://microbadger.com/images/rusxakep/nginx)
 
 # Introduction
 
@@ -15,13 +15,14 @@ This will build a container for [Nginx](https://www.nginx.org)
 *    Logrotate Included to roll over log files at 23:59, compress and retain for 7 days
 *    Ability to Password Protect (Basic), LDAP Authenticate or use LemonLDAP:NG Handler
         
-This Container uses [tiredofit/alpine:3.11](https://hub.docker.com/r/tiredofit/alpine) as a base.
+This Container uses [rusxakep/alpine:3.12](https://hub.docker.com/r/rusxakep/alpine) as a base.
 
 [Changelog](CHANGELOG.md)
 
 # Authors
 
 - [Dave Conroy](https://github.com/tiredofit)
+- [Mikhail Baykov](https://github.com/rusxakep)
 
 # Table of Contents
 
@@ -41,17 +42,15 @@ This Container uses [tiredofit/alpine:3.11](https://hub.docker.com/r/tiredofit/a
 # Prerequisites
 
 This image assumes that you are using a reverse proxy such as 
-[jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) and optionally the [Let's Encrypt Proxy 
-Companion @ 
-https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) 
+[jwilder/nginx-proxy](https://github.com/jwilder/nginx-proxy) and optionally the [Let's Encrypt Proxy Companion @ https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion) 
 in order to serve your pages. However, it will run just fine on it's own if you map appropriate ports.
 
 # Installation
 
-Automated builds of the image are available on [Docker Hub](https://hub.docker.com/tiredofit/nginx) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.com/rusxakep/nginx) and is the recommended method of installation.
 
 ```bash
-docker pull tiredofit/nginx
+docker pull rusxakep/nginx
 ```
 
 # Quick Start
@@ -79,7 +78,7 @@ The following directories are used for configuration and can be mapped for persi
 ### Environment Variables
 
 
-Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine), below is the complete list of available options that can be used to customize your installation.
+Along with the Environment Variables from the [Base image](https://hub.docker.com/r/rusxakep/alpine), below is the complete list of available options that can be used to customize your installation.
 
 *Authentication Options*
 
@@ -96,8 +95,8 @@ You can choose to request visitors be authenticated before accessing your site. 
 | `NGINX_AUTHENTICATION_LDAP_HOST` | Hostname and port number of LDAP Server - ie `ldap://ldapserver:389` |
 | `NGINX_AUTHENTICATION_LDAP_BIND_DN` | User to Bind to LDAP - ie  `cn=admin,dc=orgname,dc=org` |
 | `NGINX_AUTHENTICATION_LDAP_BIND_PW` | Password for Above Bind User - ie  `password` |
-| `NGINX_AUTHENTICATION_LDAP_BASE_DN` | Base Distringuished Name - eg `dc=hostname,dc=com` |
-| `NGINX_AUTHENTICATION_LDAP_ATTRIBUTE` | Unique Identifier Attrbiute -ie  `uid` |
+| `NGINX_AUTHENTICATION_LDAP_BASE_DN` | Base Distinguished Name - eg `dc=hostname,dc=com` |
+| `NGINX_AUTHENTICATION_LDAP_ATTRIBUTE` | Unique Identifier Attribute -ie  `uid` |
 | `NGINX_AUTHENTICATION_LDAP_SCOPE` |LDAP Scope for searching - ie `sub` |
 | `NGINX_AUTHENTICATION_LDAP_FILTER` | Define what object that is searched for (ie  `objectClass=person`) |
 | `NGINX_AUTHENTICATION_LDAP_GROUP_ATTRIBUTE` | If searching inside of a group what is the Group Attribute - ie `uniquemember` |
@@ -106,7 +105,7 @@ You can choose to request visitors be authenticated before accessing your site. 
 | `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1` | Syntax: HEADER_NAME, Variable, Upstream Variable - See note below |
 | `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` | Syntax: HEADER_NAME, Variable, Upstream Variable - See note below |
 
-When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit any `$` chracters from your string. It will be added in upon container startup. Example:
+When working with `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE2` you will need to omit any `$` characters from your string. It will be added in upon container startup. Example:
 `NGINX_AUTHENTICATION_LLNG_ATTRIBUTE1=HTTP_AUTH_USER,uid,upstream_http_uid` will get converted into `HTTP_AUTH_USER,$uid,$upstream_http_uid` and get placed in the appropriate areas in the configuration.
 
 

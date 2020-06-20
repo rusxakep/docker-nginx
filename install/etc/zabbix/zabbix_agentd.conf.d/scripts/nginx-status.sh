@@ -28,5 +28,5 @@ function requests {
 }
 
 $1
-echo ${num:-0}
+echo "${num:-0}"
 

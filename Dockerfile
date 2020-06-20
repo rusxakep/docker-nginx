@@ -1,5 +1,5 @@
-FROM tiredofit/alpine:3.12
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM rusxakep/alpine:3.12
+LABEL maintainer="Mikhail Baykov (mike at baikov dot com)"
 
 ### Set Nginx Version Number
 ENV NGINX_VERSION=1.19.0 \
@@ -55,9 +55,16 @@ RUN set -x && \
       --with-mail_ssl_module \
       --with-compat \
       --with-file-aio \
+      --with-pcre-jit \
       --with-http_v2_module \
 #     --with-http_v3_module \
-#      --with-quiche=/usr/src/quiche \
+#     --with-quiche=/usr/src/quiche \
+      --add-module=/usr/src/naxsi/naxsi_src \
+      --add-module=/usr/src/testcookie-nginx-module \
+      --add-module=/usr/src/ngx_http_enhanced_memcached_module \
+      --add-module=/usr/src/ngx_devel_kit \
+      --add-module=/usr/src/set-misc-nginx-module \
+      --add-module=/usr/src/ngx_cache_purge-2.3 \
       --add-module=/usr/src/headers-more-nginx-module \
       --add-module=/usr/src/nginx-brotli \
       --add-module=/usr/src/nginx-auth-ldap \
@@ -104,6 +111,12 @@ RUN set -x && \
     mkdir -p /www /var/log/nginx && \
     chown -R nginx:www-data /var/log/nginx && \
 #    git clone --recursive https://github.com/cloudflare/quiche /usr/src/quiche && \
+    git clone --recursive https://github.com/rusxakep/ngx_cache_purge.git /usr/src/ngx_cache_purge && \
+    git clone --recursive https://github.com/rusxakep/ngx_http_enhanced_memcached_module.git /usr/src/ngx_http_enhanced_memcached_module && \
+    git clone --recursive https://github.com/rusxakep/testcookie-nginx-module.git /usr/src/testcookie-nginx-module && \
+    git clone --recursive https://github.com/vision5/ngx_devel_kit.git  /usr/src/ngx_devel_kit && \
+    git clone --recursive https://github.com/nbs-system/naxsi.git /usr/src/naxsi && \
+    git clone --recursive https://github.com/openresty/set-misc-nginx-module.git /usr/src/set-misc-nginx-module && \
     git clone --recursive https://github.com/openresty/headers-more-nginx-module.git /usr/src/headers-more-nginx-module && \
     git clone --recursive https://github.com/google/ngx_brotli.git /usr/src/nginx-brotli && \
     cd /usr/src/nginx-brotli && \
