@@ -64,7 +64,7 @@ RUN set -x && \
       --add-module=/usr/src/ngx_http_enhanced_memcached_module \
       --add-module=/usr/src/ngx_devel_kit \
       --add-module=/usr/src/set-misc-nginx-module \
-      --add-module=/usr/src/ngx_cache_purge-2.3 \
+      --add-module=/usr/src/ngx_cache_purge \
       --add-module=/usr/src/headers-more-nginx-module \
       --add-module=/usr/src/nginx-brotli \
       --add-module=/usr/src/nginx-auth-ldap \
