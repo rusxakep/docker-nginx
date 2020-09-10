@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z $1 ]; then
+if [ -z "$1" ]; then
    echo "Usage: maintenance (on|off|sleep NUM VALUE)"
    echo ""
    echo "Example: "
@@ -31,12 +31,12 @@ case "$1" in
 	    mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.template
         mv /etc/nginx/conf.d/maintenance.template /etc/nginx/conf.d/maintenance.conf
         nginx -s reload
-        if [ -z $2 ]; then
+        if [ -z "$2" ]; then
             SLEEPNUM="15"
             SLEEPCALC=$((15 * 60))
         fi
 
-        if [ -z $3 ]; then
+        if [ -z "$3" ]; then
             set -- "${@:1:2}" "min"
         fi
 

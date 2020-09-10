@@ -34,7 +34,7 @@ sed -i "s#<WORKER_RLIMIT_NOFILE>#${NGINX_WORKER_RLIMIT_NOFILE}#g" /etc/nginx/ngi
 sed -i "s#<FASTCGI_BUFFERS>#${NGINX_FASTCGI_BUFFERS}#g" /etc/nginx/nginx.conf
 sed -i "s#<FASTCGI_BUFFER_SIZE>#${NGINX_FASTCGI_BUFFER_SIZE}#g" /etc/nginx/nginx.conf
 
-if var_true $NGINX_ENABLE_COMPRESSION_BROTLI ; then
+if var_true "$NGINX_ENABLE_COMPRESSION_BROTLI" ; then
   sed -i "s#<BROTLI_LEVEL>#${NGINX_COMPRESSION_BROTLI_LEVEL}#g" /etc/nginx/nginx.conf.d/compression_brotli.conf
   sed -i "s#<BROTLI_MIN_LENGTH>#${NGINX_COMPRESSION_BROTLI_MIN_LENGTH}#g" /etc/nginx/nginx.conf.d/compression_brotli.conf
   sed -i "s#<BROTLI_TYPES>#${NGINX_COMPRESSION_BROTLI_TYPES}#g" /etc/nginx/nginx.conf.d/compression_brotli.conf
@@ -43,7 +43,7 @@ else
   sed -i "\#include/etc/nginx/nginx.conf.d/compression_brotli.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_true $NGINX_ENABLE_COMPRESSION_GZIP ; then
+if var_true "$NGINX_ENABLE_COMPRESSION_GZIP" ; then
   sed -i "s#<GZIP_BUFFERS>#${NGINX_COMPRESSION_GZIP_BUFFERS}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
   sed -i "s#<GZIP_DISABLE>#${NGINX_COMPRESSION_GZIP_DISABLE}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
   sed -i "s#<GZIP_HTTP_VERSION>#${NGINX_COMPRESSION_GZIP_HTTP_VERSION}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
@@ -51,33 +51,33 @@ if var_true $NGINX_ENABLE_COMPRESSION_GZIP ; then
   sed -i "s#<GZIP_MIN_LENGTH>#${NGINX_COMPRESSION_GZIP_MIN_LENGTH}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
   sed -i "s#<GZIP_PROXIED>#${NGINX_COMPRESSION_GZIP_PROXIED}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
   sed -i "s#<GZIP_TYPES>#${NGINX_COMPRESSION_GZIP_TYPES}#g" /etc/nginx/nginx.conf.d/compression_gzip.conf
-  if var_false $NGINX_COMPRESSION_GZIP_VARY ; then
+  if var_false "$NGINX_COMPRESSION_GZIP_VARY" ; then
     sed -i "\#gzip_vary on;#d" /etc/nginx/nginx.conf.d/compression_gzip.conf
   fi
 else
   sed -i "\#include /etc/nginx/nginx.conf.d/compression_gzip.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_true $NGINX_ENABLE_DDOS_PROTECTION ; then
+if var_true "$NGINX_ENABLE_DDOS_PROTECTION" ; then
   sed -i "s#<DDOS_CONNECTIONS_PER_IP>#${NGINX_DDOS_CONNECTIONS_PER_IP}#g" /etc/nginx/nginx.conf.d/ddos_protection.conf
   sed -i "s#<DDOS_REQUESTS_PER_IP>#${NGINX_DDOS_REQUESTS_PER_IP}#g" /etc/nginx/nginx.conf.d/ddos_protection.conf
 else
   sed -i "\#include /etc/nginx/nginx.conf.d/ddos_protection.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_EPOLL ; then
+if var_false "$NGINX_ENABLE_EPOLL" ; then
   sed -i "\#use_epoll;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_EXPLOIT_PROTECTION ; then
+if var_false "$NGINX_ENABLE_EXPLOIT_PROTECTION" ; then
   sed -i "\#include /etc/nginx/nginx.conf.d/exploit_protection.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_MULTI_ACCEPT ; then
+if var_false "$NGINX_ENABLE_MULTI_ACCEPT" ; then
   sed -i "\#multi_accept on;#d" /etc/nginx/nginx.conf
 fi
 
-if var_true $NGINX_ENABLE_OPEN_FILE_CACHE ; then
+if var_true "$NGINX_ENABLE_OPEN_FILE_CACHE" ; then
   sed -i "s#<OPEN_FILE_CACHE_MAX>#${NGINX_OPEN_FILE_CACHE_MAX}#g" /etc/nginx/nginx.conf.d/open_file_cache.conf
   sed -i "s#<OPEN_FILE_CACHE_INACTIVE>#${NGINX_OPEN_FILE_CACHE_INACTIVE}#g" /etc/nginx/nginx.conf.d/open_file_cache.conf
   sed -i "s#<OPEN_FILE_CACHE_VALID>#${NGINX_OPEN_FILE_CACHE_VALID}#g" /etc/nginx/nginx.conf.d/open_file_cache.conf
@@ -87,39 +87,39 @@ else
   sed -i "\#include /etc/nginx/nginx.conf.d/open_file_cache.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_RESET_TIMEDOUT_CONNECTION ; then
+if var_false "$NGINX_ENABLE_RESET_TIMEDOUT_CONNECTION" ; then
   sed -i "\#reset_timedout_connection#d" /etc/nginx/nginx.conf
 fi
 
-if var_true $NGINX_ENABLE_REVERSE_PROXY ; then
+if var_true "$NGINX_ENABLE_REVERSE_PROXY" ; then
   sed -i "s#<REAL_IP_HEADER>#${NGINX_REAL_IP_HEADER}#g" /etc/nginx/nginx.conf.d/reverse_proxy.conf
   sed -i "s#<SET_REAL_IP_FROM>#${NGINX_SET_REAL_IP_FROM}#g" /etc/nginx/nginx.conf.d/reverse_proxy.conf
 else
   sed -i "\#include /etc/nginx/nginx.conf.d/reverse_proxy.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_SENDFILE ; then
+if var_false "$NGINX_ENABLE_SENDFILE" ; then
   sed -i "\#sendfile#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_SITE_OPTIMIZATION ; then
+if var_false "$NGINX_ENABLE_SITE_OPTIMIZATION" ; then
   sed -i "\#include /etc/nginx/nginx.conf.d/site_optimization.conf;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_SERVER_TOKENS ; then
+if var_false "$NGINX_ENABLE_SERVER_TOKENS" ; then
   sed -i "\#server_tokens off;#d" /etc/nginx/nginx.conf
   sed -i "\#more_clear_headers Server;#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_TCPNOPUSH ; then
+if var_false "$NGINX_ENABLE_TCPNOPUSH" ; then
   sed -i "\#tcp_nopush#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $NGINX_ENABLE_TCPNODELAY ; then
+if var_false "$NGINX_ENABLE_TCPNODELAY" ; then
   sed -i "\#tcp_nodelay#d" /etc/nginx/nginx.conf
 fi
 
-if var_false $ENABLE_ZABBIX ; then
+if var_false "$ENABLE_ZABBIX" ; then
   sed -i "\#include /etc/nginx/nginx.conf.d/zabbix.conf;#d" /etc/nginx/nginx.conf
 fi
 
@@ -156,14 +156,14 @@ case "$NGINX_MODE" in
   ;;
 esac
 
-if var_true $NGINX_ENABLE_APPLICATION_CONFIGURATION ; then
+if var_true "$NGINX_ENABLE_APPLICATION_CONFIGURATION" ; then
 ## Configure default.conf
   ### Map Authentication
   case "$NGINX_AUTHENTICATION_TYPE" in
       "BASIC")
         print_notice "Setting Basic Authentication"
-        user_num=`printenv | sort | grep '\NGINX_AUTHENTICATION_BASIC_USER.*' | wc -l`
-        for (( i = 1; i <= $user_num; i++ ))
+        user_num=$(printenv | sort | grep -c '\NGINX_AUTHENTICATION_BASIC_USER.*')
+        for (( i = 1; i <= user_num; i++ ))
           do
             basic_user=NGINX_AUTHENTICATION_BASIC_USER${i}
             basic_pass=NGINX_AUTHENTICATION_BASIC_PASS${i}
@@ -184,7 +184,7 @@ if var_true $NGINX_ENABLE_APPLICATION_CONFIGURATION ; then
         satisfy all;
       }
 EOF
-        sed -i '/ server {/a\ \ \  auth_ldap "${NGINX_AUTHENTICATION_TITLE}"; auth_ldap_servers ldapserver;' /etc/nginx/conf.d/*.conf
+        sed -i "/ server {/a\ \ \  auth_ldap ""${NGINX_AUTHENTICATION_TITLE}""; auth_ldap_servers ldapserver;" /etc/nginx/conf.d/*.conf
         sed -i "\#include /etc/nginx/conf.d/#i\ \ \ \ include /etc/nginx/nginx.conf.d/authentication/ldap_configuration;" /etc/nginx/nginx.conf
       ;;
       "LLNG")
@@ -192,13 +192,13 @@ EOF
           sed -i "s#<LLNG_HANDLER_PORT>#$NGINX_AUTHENTICATION_LLNG_HANDLER_PORT#g" /etc/nginx/nginx.conf.d/authentication/llng
           print_notice "Setting LLNG Authentication"
 
-          header_num=`printenv | sort | grep '\NGINX_AUTHENTICATION_LLNG_ATTRIBUTE.*' | wc -l`
-            for (( i = 1; i <= $header_num; i++ ))
+          header_num=$(printenv | sort | grep -c '\NGINX_AUTHENTICATION_LLNG_ATTRIBUTE.*')
+            for (( i = 1; i <= header_num; i++ ))
                 do
                   headers=NGINX_AUTHENTICATION_LLNG_ATTRIBUTE${i}
                   IFS=',' read -r -a array <<< "${!headers}"
 
-                  print_notice "Updating Nginx to support recieving attribute from LLNG: '${array[0]}'"
+                  print_notice "Updating Nginx to support receiving attribute from LLNG: '${array[0]}'"
 
                   echo "fastcgi_param ${array[0]} \$${array[1]};" >> /etc/nginx/nginx.conf.d/authentication/llng_params
                   echo "auth_request_set \$${array[1]} \$${array[2]};" >> /etc/nginx/nginx.conf.d/authentication/llng_auth_request
@@ -229,7 +229,7 @@ EOF
 
 
   ### Perform Nginx FastCGI reverse proxy modifications
-  if var_true $NGINX_ENABLE_FASTCGI_HTTPS ; then
+  if var_true "$NGINX_ENABLE_FASTCGI_HTTPS" ; then
     print_notice "Enable Nginx FastCGI HTTPS Termination Support"
     echo "fastcgi_param  HTTPS 'on';" >> /etc/nginx/fastcgi_params
     PROTOCOL="https://"
@@ -259,22 +259,22 @@ esac
 if var_true $NGINX_ENABLE_CREATE_SAMPLE_HTML ; then
   if [ ! -f "${NGINX_WEBROOT}/index.html" ] ; then
      print_notice "Creating sample index.html"
-     mkdir -p ${NGINX_WEBROOT}
-     cat <<EOF > ${NGINX_WEBROOT}/index.html
+     mkdir -p "${NGINX_WEBROOT}"
+     cat <<EOF > "${NGINX_WEBROOT}"/index.html
   <html>
   <title>Default Page</title>
   <h2>Container is working</h2>
   Congratulations! Your Nginx image is working. You are seeing this because you don't have an index.html file in your ${NGINX_WEBROOT} directory.
   </html>
 EOF
-     chown -R ${NGINX_USER}:${NGINX_GROUP} ${NGINX_WEBROOT}
+     chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"
   fi
 fi
 
 ### Force Reset Permissions for Accessibility
 mkdir -p "${NGINX_WEBROOT}"
 if [ "${FORCE_RESET_PERMISSIONS}" == "TRUE"  ]; then
-    chown -R ${NGINX_USER}:${NGINX_GROUP} ${NGINX_WEBROOT}
+    chown -R "${NGINX_USER}":"${NGINX_GROUP}" "${NGINX_WEBROOT}"
 fi
 
 ### Create Log Directories
