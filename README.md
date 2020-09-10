@@ -1,9 +1,9 @@
-# hub.docker.com/r/tiredofit/nginx
+# hub.docker.com/r/rusxakep/nginx
 
-[![Build Status](https://img.shields.io/docker/build/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Pulls](https://img.shields.io/docker/pulls/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Stars](https://img.shields.io/docker/stars/tiredofit/nginx.svg)](https://hub.docker.com/r/tiredofit/nginx)
-[![Docker Layers](https://images.microbadger.com/badges/image/tiredofit/nginx.svg)](https://microbadger.com/images/tiredofit/nginx)
+[![Build Status](https://img.shields.io/docker/cloud/build/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Stars](https://img.shields.io/docker/stars/rusxakep/nginx.svg)](https://hub.docker.com/r/rusxakep/nginx)
+[![Docker Layers](https://images.microbadger.com/badges/image/rusxakep/nginx.svg)](https://microbadger.com/images/rusxakep/nginx)
 
 ## Introduction
 
@@ -15,13 +15,14 @@ This will build a container for [Nginx](https://www.nginx.org)
 *    Logrotate Included to roll over log files at 23:59, compress and retain for 7 days
 *    Ability to Password Protect (Basic), LDAP Authenticate or use LemonLDAP:NG Handler
 
-This Container uses [tiredofit/alpine](https://hub.docker.com/r/tiredofit/alpine) as a base.
+This Container uses [rusxakep/alpine](https://hub.docker.com/r/rusxakep/alpine) as a base.
 
 [Changelog](CHANGELOG.md)
 
 ## Authors
 
 - [Dave Conroy](https://github.com/tiredofit)
+- [Mikhail Baykov](https://github.com/rusxakep)
 
 ## Table of Contents
 
@@ -57,10 +58,10 @@ in order to serve your pages. However, it will run just fine on it's own if you 
 
 ## Installation
 
-Automated builds of the image are available on [Docker Hub](https://hub.docker.com/tiredofit/nginx) and is the recommended method of installation.
+Automated builds of the image are available on [Docker Hub](https://hub.docker.com/rusxakep/nginx) and is the recommended method of installation.
 
 ```bash
-docker pull tiredofit/nginx
+docker pull rusxakep/nginx
 ```
 
 ### Quick Start
@@ -88,7 +89,7 @@ The following directories are used for configuration and can be mapped for persi
 ### Environment Variables
 
 
-Along with the Environment Variables from the [Base image](https://hub.docker.com/r/tiredofit/alpine), below is the complete list of available options that can be used to customize your installation.
+Along with the Environment Variables from the [Base image](https://hub.docker.com/r/rusxakep/alpine), below is the complete list of available options that can be used to customize your installation.
 
 #### Authentication Options
 
