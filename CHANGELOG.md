@@ -1,3 +1,36 @@
+## 5.11.6 2020-09-07 <dave at tiredofit dot ca>
+
+   ### Changed
+      - Change to LLNG Authentication method to address CVE
+
+
+## 5.11.5 2020-08-29 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add ENABLE_NGINX variable
+
+
+## 5.11.4 2020-08-18 <dave at tiredofit dot ca>
+
+   ### Added
+      - Nginx 1.19.2
+
+
+## 5.11.3 2020-08-12 <dave at tiredofit dot ca>
+
+   ### Added
+      - Add NGINX_CLIENT_BODY_BUFFER_SIZE environment variable
+
+
+## 5.11.2 2020-07-15 <dave at tiredofit dot ca>
+
+   ### Added
+      - Nginx 1.19.1
+
+   ### Changed
+      - Code cleanup as per bash shellcheck warnings
+
+
 ## 5.11.1 2020-06-11 <dave at tiredofit dot ca>
 
    ### Changed
